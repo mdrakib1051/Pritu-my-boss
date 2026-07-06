@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎈</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #fdf6e2; /* ভিডিওর মতো হালকা হলুদ ব্যাকগ্রাউন্ড */
+            background-image: radial-gradient(#dbcaeb 20%, transparent 20%), radial-gradient(#dbcaeb 20%, transparent 20%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 5px solid #b19cd9; /* পার্পল বর্ডার */
+        }
+
+        h2 { color: #6f5499; }
+
+        input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 2px solid #b19cd9;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #b19cd9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { background-color: #9370db; }
+        
+        .hidden { display: none; }
+        
+        .btn-group {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        
+        .no-btn { background-color: #ffb6c1; }
+        .no-btn:hover { background-color: #ff69b4; }
+    </style>
+</head>
+<body>
+
+    <div id="password-screen" class="card">
+        <h2>Enter the secret password to view 🔒</h2>
+        <input type="password" id="password-input" placeholder="পাসওয়ার্ড লিখুন...">
+        <br>
+        <button onclick="checkPassword()">Continue</button>
+    </div>
+
+    <div id="question-screen" class="card hidden">
+        <h2>Hey! I made something for you. ❤️ <br> Do you wanna see it?</h2>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdtcm9wYm95NzR0ZXN5OXp3Ym95eW95YnEwbXpqNXA0bms4ZXFwdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cKKXp6rAsT54c/giphy.gif" width="150" alt="Cute Dog">
+        <div class="btn-group">
+            <button onclick="showGiftPage()">Yes</button>
+            <button class="no-btn" onclick="sayHmph()">No</button>
+        </div>
+    </div>
+
+    <div id="hmph-screen" class="card hidden">
+        <h2>SERIOUSLY?! How dare you hmph 😤</h2>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5b293NTh3bXYxamN4YW9pY2g0dWpndmN5b3Zsa3VwcmN4bmRxOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/t33M0N935U8m63fL7W/giphy.gif" width="150" alt="Angry Dog">
+        <br><br>
+        <button onclick="backToQuestion()">Go back</button>
+    </div>
+
+    <script>
+        // আপনার সিক্রেট পাসওয়ার্ড এখানে সেট করুন (যেমন: 1234 বা bday)
+        const secretPassword = "bday"; 
+
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            if(input === secretPassword) {
+                document.getElementById('password-screen').classList.add('hidden');
+                document.getElementById('question-screen').classList.remove('hidden');
+            } else {
+                alert("ভুল পাসওয়ার্ড! আবার চেষ্টা করুন। 😉");
+            }
+        }
+
+        function sayHmph() {
+            document.getElementById('question-screen').classList.add('hidden');
+            document.getElementById('hmph-screen').classList.remove('hidden');
+        }
+
+        function backToQuestion() {
+            document.getElementById('hmph-screen').classList.add('hidden');
+            document.getElementById('question-screen').classList.remove('hidden');
+        }
+
+        function showGiftPage() {
+            alert("অভিনন্দন! এবার আসল সারপ্রাইজ পেজ (ফটো গ্যালারি, চিঠি ও মিউজিক) লোড হবে।");
+            // পরবর্তী ধাপে আমরা আসল গিফট বক্সের ডিজাইন যোগ করব।
+        }
+    </script>
+</body>
+</html>
