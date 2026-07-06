@@ -1,125 +1,245 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 🎈</title>
+    <title>Happy Birthday! 🌟</title>
     <style>
+        :root {
+            --emerald: #050114; /* ডার্ক ব্যাকগ্রাউন্ড */
+            --glass-bg: rgba(10, 35, 22, 0.4); /* এমারেল্ড গ্রিন গ্লাসমর্ফিজম */
+            --glass-border: rgba(213, 218, 215, 0.2); /* ডায়মন্ড সিলভার বর্ডার */
+            --silver-text: #d5dad7; /* ডায়মন্ড সিলভার টেক্সট */
+            --emerald-bright: #50c878; /* ব্রাইট এমারেল্ড গ্রিন */
+        }
+
         body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #fdf6e2; /* ভিডিওর মতো হালকা হলুদ ব্যাকগ্রাউন্ড */
-            background-image: radial-gradient(#dbcaeb 20%, transparent 20%), radial-gradient(#dbcaeb 20%, transparent 20%);
+            background-color: var(--emerald);
+            background-image: radial-gradient(rgba(80, 200, 120, 0.1) 20%, transparent 20%);
             background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
+            color: var(--silver-text);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: 40px 30px;
+            border-radius: 25px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             text-align: center;
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
-            border: 5px solid #b19cd9; /* পার্পল বর্ডার */
+            transition: all 0.5s ease;
         }
 
-        h2 { color: #6f5499; }
+        h2 {
+            color: var(--silver-text);
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(80, 200, 120, 0.5);
+            margin-bottom: 20px;
+        }
 
         input[type="password"] {
             width: 80%;
-            padding: 10px;
-            margin: 15px 0;
-            border: 2px solid #b19cd9;
-            border-radius: 10px;
+            padding: 12px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
             font-size: 16px;
             text-align: center;
+            color: white;
+            outline: none;
         }
 
         button {
-            background-color: #b19cd9;
+            background: linear-gradient(135deg, #50c878, #3b9c5a);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 30px;
             font-size: 16px;
-            border-radius: 10px;
+            font-weight: bold;
+            border-radius: 12px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 15px rgba(80, 200, 120, 0.3);
         }
 
-        button:hover { background-color: #9370db; }
-        
-        .hidden { display: none; }
-        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(80, 200, 120, 0.5);
+        }
+
+        .hidden { display: none !important; }
+
         .btn-group {
             display: flex;
             justify-content: space-around;
-            margin-top: 20px;
+            margin-top: 25px;
         }
-        
-        .no-btn { background-color: #ffb6c1; }
-        .no-btn:hover { background-color: #ff69b4; }
+
+        .no-btn {
+            background: linear-gradient(135deg, #a0a5a2, #7c807e);
+            box-shadow: 0 4px 15px rgba(160, 165, 162, 0.3);
+        }
+
+        /* গিফট বক্স ও মেনু স্টাইল */
+        .icon-grid {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .icon-item {
+            cursor: pointer;
+            transition: transform 0.3s;
+            font-size: 45px;
+        }
+
+        .icon-item:hover {
+            transform: scale(1.2);
+        }
+
+        /* গ্যালারি স্টাইল */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* চিঠি স্ক্রোল স্টাইল */
+        .letter-box {
+            text-align: left;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            border: 1px solid var(--glass-border);
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            padding: 8px 20px;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 
-    <div id="password-screen" class="card">
-        <h2>Enter the secret password to view 🔒</h2>
-        <input type="password" id="password-input" placeholder="পাসওয়ার্ড লিখুন...">
+    <!-- ১. পাসওয়ার্ড স্ক্রিন -->
+    <div id="screen-1" class="card">
+        <h2>Enter the password to view 🔒</h2>
+        <input type="password" id="pwd-input" placeholder="পাসওয়ার্ড দিন...">
         <br>
         <button onclick="checkPassword()">Continue</button>
     </div>
 
-    <div id="question-screen" class="card hidden">
-        <h2>Hey! I made something for you. ❤️ <br> Do you wanna see it?</h2>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdtcm9wYm95NzR0ZXN5OXp3Ym95eW95YnEwbXpqNXA0bms4ZXFwdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cKKXp6rAsT54c/giphy.gif" width="150" alt="Cute Dog">
+    <!-- ২. সারপ্রাইজ প্রশ্ন স্ক্রিন -->
+    <div id="screen-2" class="card hidden">
+        <h2>Hey! I made something for you.<br>Do you wanna see it? 🥺</h2>
         <div class="btn-group">
-            <button onclick="showGiftPage()">Yes</button>
-            <button class="no-btn" onclick="sayHmph()">No</button>
+            <button onclick="navTo(3)">Yes</button>
+            <button class="no-btn" onclick="navTo('hmph')">No</button>
         </div>
     </div>
 
-    <div id="hmph-screen" class="card hidden">
+    <!-- ২.১ 'No' চাপলে ফানি স্ক্রিন -->
+    <div id="screen-hmph" class="card hidden">
         <h2>SERIOUSLY?! How dare you hmph 😤</h2>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5b293NTh3bXYxamN4YW9pY2g0dWpndmN5b3Zsa3VwcmN4bmRxOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/t33M0N935U8m63fL7W/giphy.gif" width="150" alt="Angry Dog">
-        <br><br>
-        <button onclick="backToQuestion()">Go back</button>
+        <button class="back-btn" onclick="navTo(2)">Go Back</button>
+    </div>
+
+    <!-- ৩. মূল গিফট সিলেকশন স্ক্রিন -->
+    <div id="screen-3" class="card hidden">
+        <h2>Click on each item to open ✨</h2>
+        <div class="icon-grid">
+            <div class="icon-item" onclick="navTo('gallery')">📸<div style="font-size:12px; color:var(--silver-text);">Memories</div></div>
+            <div class="icon-item" onclick="navTo('letter')">✉️<div style="font-size:12px; color:var(--silver-text);">Letter</div></div>
+            <div class="icon-item" onclick="navTo('music')">🎵<div style="font-size:12px; color:var(--silver-text);">Music</div></div>
+        </div>
+    </div>
+
+    <!-- ৪. মেমোরি গ্যালারি স্ক্রিন -->
+    <div id="screen-gallery" class="card hidden">
+        <h2>Moments of Us 🤍</h2>
+        <div class="gallery">
+            <!-- এখানে আপনার ছবির লিঙ্ক বা নাম বসাবেন -->
+            <img src="https://via.placeholder.com/150" alt="Pic 1">
+            <img src="https://via.placeholder.com/150" alt="Pic 2">
+            <img src="https://via.placeholder.com/150" alt="Pic 3">
+            <img src="https://via.placeholder.com/150" alt="Pic 4">
+        </div>
+        <button class="back-btn" onclick="navTo(3)">Back</button>
+    </div>
+
+    <!-- ৫. বার্থডে লেটার স্ক্রিন -->
+    <div id="screen-letter" class="card hidden">
+        <h2>Happy Birthday! ✍️</h2>
+        <div class="letter-box">
+            <!-- এখানে আপনার চিঠিটি লিখুন -->
+            এখানে আপনার মনের মতো সুন্দর একটি বার্থডে মেসেজ বা চিঠি লিখে দিতে পারেন। এটি স্ক্রোল করা যাবে, তাই যত বড় খুশি লেখা সম্ভব! <br><br>
+            "Wishing you a fantastic year ahead full of success, joy, and laughter!"
+        </div>
+        <button class="back-btn" onclick="navTo(3)">Back</button>
+    </div>
+
+    <!-- ৬. মিউজিক/ইউটিউব ভিডিও স্ক্রিন -->
+    <div id="screen-music" class="card hidden">
+        <h2>Our Song 🎶</h2>
+        <!-- ইউটিউব ভিডিও বা অডিও প্লেয়ার (ভিডিওর Bruno Mars গানের মতো) -->
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <!-- 'dQw4w9WgXcQ' এর জায়গায় আপনার পছন্দের ইউটিউব ভিডিওর আইডি বসিয়ে দিন -->
+            <iframe id="yt-player" style="position: absolute; top:0; left:0; width:100%; height:100%;" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <button class="back-btn" onclick="navTo(3)">Back</button>
     </div>
 
     <script>
-        // আপনার সিক্রেট পাসওয়ার্ড এখানে সেট করুন (যেমন: 1234 বা bday)
-        const secretPassword = "bday"; 
+        const secretPwd = "bday"; // আপনার পাসওয়ার্ড
 
         function checkPassword() {
-            const input = document.getElementById('password-input').value;
-            if(input === secretPassword) {
-                document.getElementById('password-screen').classList.add('hidden');
-                document.getElementById('question-screen').classList.remove('hidden');
+            const input = document.getElementById('pwd-input').value;
+            if(input === secretPwd) {
+                navTo(2);
             } else {
-                alert("ভুল পাসওয়ার্ড! আবার চেষ্টা করুন। 😉");
+                alert("Wrong password! 🤫");
             }
         }
 
-        function sayHmph() {
-            document.getElementById('question-screen').classList.add('hidden');
-            document.getElementById('hmph-screen').classList.remove('hidden');
-        }
+        function navTo(screenId) {
+            // সব স্ক্রিন হাইড করা
+            document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+            
+            // টার্গেট স্ক্রিন শো করা
+            document.getElementById('screen-' + screenId).classList.remove('hidden');
 
-        function backToQuestion() {
-            document.getElementById('hmph-screen').classList.add('hidden');
-            document.getElementById('question-screen').classList.remove('hidden');
-        }
-
-        function showGiftPage() {
-            alert("অভিনন্দন! এবার আসল সারপ্রাইজ পেজ (ফটো গ্যালারি, চিঠি ও মিউজিক) লোড হবে।");
-            // পরবর্তী ধাপে আমরা আসল গিফট বক্সের ডিজাইন যোগ করব।
+            // মিউজিক পেজ থেকে বের হলে ইউটিউব ভিডিও পজ করার জন্য
+            const iframe = document.getElementById('yt-player');
+            if (screenId !== 'music' && iframe) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
         }
     </script>
 </body>
