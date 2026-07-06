@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #fcf6d6; 
             background-image: repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(186, 163, 214, 0.3) 20px, rgba(186, 163, 214, 0.3) 40px);
             display: flex;
@@ -18,54 +18,82 @@
             overflow: hidden;
         }
 
-        .container {
+        /* ক্যানভা স্টাইল স্লাইডার উইন্ডো */
+        .slider-window {
+            width: 380px;
+            height: 520px;
             background: white;
-            padding: 30px;
             border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            text-align: center;
-            max-width: 400px;
-            width: 85%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             border: 4px solid #baa3d6; 
+            overflow: hidden;
             position: relative;
         }
 
-        h2 { color: #5c4a78; font-size: 20px; margin-bottom: 15px; }
-        .hidden { display: none !important; }
+        .slider-track {
+            display: flex;
+            width: 800%; /* মোট ৮টি পেজ */
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* স্মুথ ক্যানভা স্লাইড ট্রানজিশন */
+        }
 
-        /* 1st Page: Robotic Captcha Layout */
+        .page {
+            width: 12.5%; /* প্রতিটি পেজের সাইজ ১ ভাগ */
+            height: 100%;
+            box-sizing: border-box;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* প্রিমিয়াম টাইপোগ্রাফি ও এলিমেন্টস */
+        h2 { 
+            color: #5c4a78; 
+            font-size: 22px; 
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .sub-text {
+            font-size: 14px;
+            color: #7d6b9d;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        /* রোবোটিক ক্যাপচা বক্স */
         .captcha-box {
             border: 1px solid #d3d3d3;
             background: #f9f9f9;
             border-radius: 4px;
-            padding: 10px 15px;
+            padding: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 80%;
-            margin: 15px auto;
+            width: 85%;
+            margin-bottom: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         .captcha-left { display: flex; align-items: center; gap: 12px; }
-        .captcha-checkbox {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            border: 2px solid #c1c1c1;
-            border-radius: 2px;
-        }
+        .captcha-checkbox { width: 24px; height: 24px; cursor: pointer; }
         .captcha-text { font-size: 14px; color: #333; font-family: Roboto, Arial, sans-serif; }
-        .captcha-logo { text-align: center; font-size: 10px; color: #555; }
-        .captcha-logo img { width: 28px; display: block; margin: 0 auto; }
+        .captcha-logo { text-align: center; font-size: 9px; color: #555; line-height: 1; }
+        .captcha-logo img { width: 26px; display: block; margin: 0 auto 2px; }
 
         input[type="password"] {
             width: 80%;
             padding: 12px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             border: 2px solid #baa3d6;
             border-radius: 8px;
             font-size: 16px;
             text-align: center;
             outline: none;
+            background: #fdfdfd;
         }
 
         button {
@@ -73,28 +101,52 @@
             color: white;
             border: none;
             padding: 12px 40px;
-            font-size: 16px;
-            border-radius: 6px;
+            font-size: 15px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             width: 85%;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #3b2e75; }
+
+        /* ডগ ইমেজ এবং অ্যানিমেশন */
+        .dog-gif { 
+            width: 150px; 
+            height: 150px; 
+            object-fit: cover; 
+            border-radius: 50%; 
+            margin: 15px auto; 
+            border: 3px solid #baa3d6;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        /* Dog Pages Style */
-        .dog-gif { width: 140px; height: 140px; object-fit: cover; border-radius: 50%; margin: 15px auto; border: 3px solid #baa3d6; display: block;}
-        .btn-group { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
-        .no-btn { background-color: #e0d5ed; color: #5c4a78; }
-        .pink-btn { background-color: #baa3d6; border-radius: 50px; }
+        /* হার্ট শেপ মাস্ক ডগ ছবির জন্য */
+        .heart-mask {
+            width: 150px;
+            height: 150px;
+            background: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI0Z3d3Z3NqZ2o0NDB6MTN3Zmx4bWptOHR6Nms3b3RndXN5bWV4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xT0xeuOy2Fcl9vDGiA/giphy.gif') center center no-repeat;
+            background-size: cover;
+            clip-path: url(#heart-path); /* কাস্টম হার্ট মাস্ক বা গোল উইথ লাভ */
+            border-radius: 50%; /* সেফটি ব্যাকআপ */
+            margin: 15px auto;
+        }
 
-        /* Icon Grid Screen */
-        .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 25px; }
-        .icon-item { background: #f7f3fc; padding: 15px 5px; border-radius: 16px; cursor: pointer; transition: 0.3s; }
-        .icon-item span { font-size: 40px; display: block; margin-bottom: 5px; }
-        .icon-item label { font-size: 12px; color: #5c4a78; font-weight: bold; cursor: pointer;}
+        .btn-group { display: flex; justify-content: center; gap: 15px; width: 85%; }
+        .yes-btn { background-color: #baa3d6; border-radius: 50px; width: 100px; }
+        .no-btn { background-color: #e0d5ed; color: #5c4a78; border-radius: 50px; width: 100px; }
+        .click-btn { background-color: #baa3d6; border-radius: 50px; width: auto; padding: 12px 50px; }
 
-        /* Google Search UI for Memories */
-        .google-header { text-align: left; border-bottom: 1px solid #ebebeb; padding-bottom: 10px; margin-bottom: 15px; }
-        .google-logo { font-size: 22px; font-weight: bold; color: #4285F4; margin-bottom: 8px; }
+        /* অপশনস গ্রিড */
+        .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 25px; width: 90%; }
+        .icon-item { background: #fdfbf7; padding: 20px 5px; border-radius: 16px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 2px solid transparent; transition: 0.2s; }
+        .icon-item:hover { border-color: #baa3d6; transform: translateY(-3px); }
+        .icon-item span { font-size: 42px; display: block; margin-bottom: 8px; }
+        .icon-item label { font-size: 13px; color: #5c4a78; font-weight: bold; cursor: pointer; }
+
+        /* হুবহু Google Search UI Layout */
+        .google-header { text-align: left; border-bottom: 1px solid #ebebeb; padding-bottom: 10px; margin-bottom: 15px; width: 100%; }
+        .google-logo { font-size: 24px; font-weight: bold; color: #4285F4; margin-bottom: 8px; font-family: 'Product Sans', Arial, sans-serif; }
         .google-logo span:nth-child(2) { color: #EA4335; }
         .google-logo span:nth-child(3) { color: #FBBC05; }
         .google-logo span:nth-child(4) { color: #4285F4; }
@@ -103,175 +155,178 @@
         
         .search-bar-mock {
             border: 1px solid #dfe1e5;
-            padding: 8px 15px;
+            padding: 10px 15px;
             border-radius: 24px;
             font-size: 14px;
             color: #202124;
             background: #fff;
-            box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+            box-shadow: 0 1px 6px rgba(32,33,36,0.18);
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
-
-        .google-tabs { display: flex; gap: 15px; font-size: 13px; color: #5f6368; overflow-x: auto; }
-        .google-tabs div { cursor: pointer; padding-bottom: 5px; }
-        .google-tabs .active { color: #1a73e8; border-bottom: 3px solid #1a73e8; font-weight: bold; }
+        .google-tabs { display: flex; gap: 15px; font-size: 13px; color: #5f6368; }
+        .google-tabs .active { color: #1a73e8; border-bottom: 3px solid #1a73e8; font-weight: bold; padding-bottom: 5px; }
 
         .google-gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            max-height: 200px;
+            gap: 8px;
+            max-height: 220px;
             overflow-y: auto;
+            width: 100%;
             padding: 5px 0;
         }
-        .google-gallery img { width: 100%; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd; }
+        .google-gallery img { width: 100%; height: 85px; object-fit: cover; border-radius: 8px; }
 
-        /* Letter Box */
-        .letter-text { background: #fdfbf7; padding: 15px; border-radius: 12px; border: 1px dashed #baa3d6; max-height: 200px; overflow-y: auto; text-align: left; font-size: 14px; line-height: 1.6; color: #4a3b63; }
-        .back-btn { background-color: #baa3d6; padding: 8px 20px; font-size: 14px; margin-top: 15px; border-radius: 50px; width: auto;}
+        /* চিঠি পেজ */
+        .letter-text { background: #fdfbf7; padding: 20px; border-radius: 16px; border: 1px dashed #baa3d6; max-height: 220px; overflow-y: auto; text-align: left; font-size: 14px; line-height: 1.6; color: #4a3b63; width: 90%; box-sizing: border-box;}
+        .back-btn { background-color: #baa3d6; padding: 8px 25px; font-size: 14px; margin-top: 20px; border-radius: 50px; width: auto; }
     </style>
 </head>
 <body>
 
-    <!-- ১. পাসওয়ার্ড ও রোবোটিক ক্যাপচা পেজ -->
-    <div id="page-1" class="container">
-        <h2>Enter the password to view</h2>
-        <input type="password" id="pwd" placeholder="••••••••">
-        
-        <!-- Google reCAPTCHA Layout -->
-        <div class="captcha-box">
-            <div class="captcha-left">
-                <input type="checkbox" id="captcha-check" class="captcha-checkbox">
-                <label for="captcha-check" class="captcha-text">I'm not a robot</label>
+    <div class="slider-window">
+        <div class="slider-track" id="track">
+            
+            <!-- পেজ ০: পাসওয়ার্ড ও ক্যাপচা -->
+            <div class="page">
+                <h2>Enter the password to view</h2>
+                <input type="password" id="pwd" placeholder="••••••••">
+                
+                <div class="captcha-box">
+                    <div class="captcha-left">
+                        <input type="checkbox" id="captcha-check" class="captcha-checkbox">
+                        <span class="captcha-text">I'm not a robot</span>
+                    </div>
+                    <div class="captcha-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/RecaptchaLogo.svg" alt="reCAPTCHA">
+                        <span>reCAPTCHA</span>
+                    </div>
+                </div>
+                <button onclick="checkPwd()">Continue</button>
             </div>
-            <div class="captcha-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/RecaptchaLogo.svg" alt="reCAPTCHA">
-                <span>reCAPTCHA</span>
+
+            <!-- পেজ ১: প্রশ্ন স্ক্রিন -->
+            <div class="page">
+                <h2>Hey! I made something for you <br> do you wanna see it? 🥺</h2>
+                <img class="dog-gif" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdtcm9wYm95NzR0ZXN5OXp3Ym95eW95YnEwbXpqNXA0bms4ZXFwdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWZfY3Q9cw/cKKXp6rAsT54c/giphy.gif" alt="Cute Dog">
+                <div class="btn-group">
+                    <button class="yes-btn" onclick="slideToPage(3)">Yes</button>
+                    <button class="no-btn" onclick="slideToPage(2)">No</button>
+                </div>
             </div>
-        </div>
-        
-        <button onclick="checkPwd()">Continue</button>
-    </div>
 
-    <!-- ২. ফার্স্ট কোয়েশ্চেন পেজ -->
-    <div id="page-2" class="container hidden">
-        <h2>Hey! I made something for you, do you wanna see it? 🥺</h2>
-        <img class="dog-gif" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdtcm9wYm95NzR0ZXN5OXp3Ym95eW95YnEwbXpqNXA0bms4ZXFwdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cKKXp6rAsT54c/giphy.gif" alt="Cute Dog">
-        <div class="btn-group">
-            <button class="pink-btn" onclick="showPage(4)">Yes</button>
-            <button class="no-btn" onclick="showPage(3)">No</button>
-        </div>
-    </div>
-
-    <!-- ৩. 'No' চাপলে ফানি রিঅ্যাকশন পেজ -->
-    <div id="page-3" class="container hidden">
-        <h2>SERIOUSLY!? how dare you hmph 😤</h2>
-        <img class="dog-gif" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5b293NTh3bXYxamN4YW9pY2g0dWpndmN5b3Zsa3VwcmN4bmRxOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/t33M0N935U8m63fL7W/giphy.gif" alt="Angry Dog">
-        <div class="btn-group">
-            <button class="pink-btn" onclick="showPage(2)">Go back</button>
-        </div>
-    </div>
-
-    <!-- ৪. দ্যাটস আ গুড গার্ল পেজ -->
-    <div id="page-4" class="container hidden">
-        <h2>That's a good Gurll 🤍</h2>
-        <img class="dog-gif" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI0Z3d3Z3NqZ2o0NDB6MTN3Zmx4bWptOHR6Nms3b3RndXN5bWV4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xT0xeuOy2Fcl9vDGiA/giphy.gif" alt="Happy Dog">
-        <br>
-        <button class="pink-btn" onclick="showPage(5)">Click Here ✨</button>
-    </div>
-
-    <!-- ৫. মূল গিফট সিলেকশন পেজ -->
-    <div id="page-5" class="container hidden">
-        <h2>click on each item to open ✨</h2>
-        <div class="icon-grid">
-            <div class="icon-item" onclick="showPage('gallery')">
-                <span>📸</span>
-                <label>Memories</label>
+            <!-- পেজ ২: No চাপলে Hmph রিঅ্যাকশন -->
+            <div class="page">
+                <h2>SERIOUSLY!? how dare you hmph 😤</h2>
+                <img class="dog-gif" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5b293NTh3bXYxamN4YW9pY2g0dWpndmN5b3Zsa3VwcmN4bmRxOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/t33M0N935U8m63fL7W/giphy.gif" alt="Angry Dog">
+                <div class="btn-group">
+                    <button class="yes-btn" onclick="slideToPage(1)">Go back</button>
+                </div>
             </div>
-            <div class="icon-item" onclick="showPage('letter')">
-                <span>✉️</span>
-                <label>Letter</label>
-            </div>
-            <div class="icon-item" onclick="showPage('music')">
-                <span>📟</span>
-                <label>Our Song</label>
-            </div>
-        </div>
-    </div>
 
-    <!-- ৬. মেমোরিজ (হুবহু Google Search UI Layout) -->
-    <div id="page-gallery" class="container hidden" style="padding: 20px 15px;">
-        <div class="google-header">
-            <div class="google-logo"><span>M</span><span>e</span><span>m</span><span>o</span><span>r</span><span>i</span><span>e</span><span>s</span><span> ❤️</span></div>
-            <div class="search-bar-mock">
-                <span>Moments of us</span>
-                <span>🔍</span>
+            <!-- পেজ ৩: That's a good Gurll -->
+            <div class="page">
+                <h2>That's a good Gurll 🤍</h2>
+                <div class="heart-mask"></div>
+                <button class="click-btn" onclick="slideToPage(4)">Click ✨</button>
             </div>
-            <div class="google-tabs">
-                <div class="active">All</div>
-                <div>Images</div>
-                <div>Videos</div>
-                <div>Maps</div>
+
+            <!-- পেজ ৪: মূল মেনু গ্রিড -->
+            <div class="page">
+                <h2>click on each item to open ✨</h2>
+                <div class="icon-grid">
+                    <div class="icon-item" onclick="slideToPage(5)">
+                        <span>📸</span>
+                        <label>Memories</label>
+                    </div>
+                    <div class="icon-item" onclick="slideToPage(6)">
+                        <span>✉️</span>
+                        <label>Letter</label>
+                    </div>
+                    <div class="icon-item" onclick="slideToPage(7)">
+                        <span>📟</span>
+                        <label>Our Song</label>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div class="google-gallery">
-            <!-- এখানে আপনার বন্ধুদের ছবি বা র্যান্ডম ছবি থাকবে (ভিডিওর গ্রিডের মতো) -->
-            <img src="https://picsum.photos/id/1025/150/150" alt="Memory 1">
-            <img src="https://picsum.photos/id/64/150/150" alt="Memory 2">
-            <img src="https://picsum.photos/id/1062/150/150" alt="Memory 3">
-            <img src="https://picsum.photos/id/237/150/150" alt="Memory 4">
-            <img src="https://picsum.photos/id/169/150/150" alt="Memory 5">
-            <img src="https://picsum.photos/id/219/150/150" alt="Memory 6">
-        </div>
-        <button class="back-btn" onclick="showPage(5)">Back</button>
-    </div>
 
-    <!-- ৭. চিঠি পেজ -->
-    <div id="page-letter" class="container hidden">
-        <h2>Happy Birthday! 🎉</h2>
-        <div class="letter-text">
-            "I honestly don't know how to put into words how grateful I am to have you in my life. Thank you for being my biggest supporter, my partner in crime, and the person I can always count on..."
-        </div>
-        <button class="back-btn" onclick="showPage(5)">Back</button>
-    </div>
+            <!-- পেজ ৫: গুগল মেমোরিজ গ্যালারি -->
+            <div class="page" style="justify-content: flex-start;">
+                <div class="google-header">
+                    <div class="google-logo"><span>M</span><span>e</span><span>m</span><span>o</span><span>r</span><span>i</span><span>e</span><span>s</span><span>❤️</span></div>
+                    <div class="search-bar-mock">
+                        <span>Moments of us 💖</span>
+                        <span>🔍</span>
+                    </div>
+                    <div class="google-tabs">
+                        <div class="active">All</div>
+                        <div>Images</div>
+                        <div>Videos</div>
+                        <div>Maps</div>
+                    </div>
+                </div>
+                <div class="google-gallery">
+                    <img src="https://picsum.photos/id/1025/150/150" alt="Memory 1">
+                    <img src="https://picsum.photos/id/64/150/150" alt="Memory 2">
+                    <img src="https://picsum.photos/id/1062/150/150" alt="Memory 3">
+                    <img src="https://picsum.photos/id/237/150/150" alt="Memory 4">
+                    <img src="https://picsum.photos/id/169/150/150" alt="Memory 5">
+                    <img src="https://picsum.photos/id/219/150/150" alt="Memory 6">
+                </div>
+                <button class="back-btn" onclick="slideToPage(4)">Back</button>
+            </div>
 
-    <!-- ৮. মিউজিক পেজ -->
-    <div id="page-music" class="container hidden">
-        <h2>Count on Me 🎶</h2>
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px;">
-            <iframe id="music-player" style="position: absolute; top:0; left:0; width:100%; height:100%;" src="https://www.youtube.com/embed/Yc6T9iY9SOU?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <!-- পেজ ৬: চিঠি -->
+            <div class="page">
+                <h2>Happy Birthday, Bestie! ✨📝</h2>
+                <div class="letter-text">
+                    "I honestly don't know how to put into words how grateful I am to have you in my life. Thank you for being my biggest supporter, my partner in crime, and the person I can always count on..."
+                </div>
+                <button class="back-btn" onclick="slideToPage(4)">Back</button>
+            </div>
+
+            <!-- পেজ ৭: মিউজিক প্লেয়ার -->
+            <div class="page">
+                <h2>Count on Me 🎶</h2>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; width: 90%;">
+                    <iframe id="music-player" style="position: absolute; top:0; left:0; width:100%; height:100%;" src="https://www.youtube.com/embed/Yc6T9iY9SOU?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <button class="back-btn" onclick="slideToPage(4)">Back</button>
+            </div>
+
         </div>
-        <button class="back-btn" onclick="showPage(5)">Back</button>
     </div>
 
     <script>
-        const correctPassword = "bday"; // পাসওয়ার্ড 'bday'
+        const correctPassword = "bday"; 
 
         function checkPwd() {
             const input = document.getElementById('pwd').value;
             const captchaChecked = document.getElementById('captcha-check').checked;
             
             if(!captchaChecked) {
-                alert("Please check the 'I'm not a robot' box! 🤖");
+                alert("Please verify that you're not a robot! 🤖");
                 return;
             }
             
             if(input === correctPassword) {
-                showPage(2);
+                slideToPage(1); // পাসওয়ার্ড মিললে ১ম পেজে স্লাইড হবে
             } else {
                 alert("Wrong password! 🤫");
             }
         }
 
-        function showPage(pageId) {
-            document.querySelectorAll('.container').forEach(page => page.classList.add('hidden'));
-            document.getElementById('page-' + pageId).classList.remove('hidden');
+        function slideToPage(pageIndex) {
+            const track = document.getElementById('track');
+            // ক্যানভা স্টাইলে পুরো ট্র্যাকটিকে বামে সরিয়ে নেওয়া (১২.৫% করে প্রতি পেজ)
+            track.style.transform = `translateX(-${pageIndex * 12.5}%)`;
 
+            // মিউজিক পেজ থেকে বের হলে গান পজ করার ট্রিক
             const player = document.getElementById('music-player');
-            if(pageId !== 'music' && player) {
+            if(pageIndex !== 7 && player) {
                 player.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
             }
         }
