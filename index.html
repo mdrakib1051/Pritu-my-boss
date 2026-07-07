@@ -26,7 +26,7 @@
             --font-bn-premium: 'Hind Siliguri', sans-serif;
         }
 
-        /* --- Reset & Mobile First Optimization --- */
+        /* --- Reset & Mobile Optimization --- */
         * {
             margin: 0;
             padding: 0;
@@ -39,30 +39,122 @@
             color: var(--diamond-silver);
             font-family: var(--font-en-body);
             overflow-x: hidden;
-            padding-bottom: 60px;
             background-image: 
                 linear-gradient(rgba(0, 255, 136, 0.01) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 255, 136, 0.01) 1px, transparent 1px);
             background-size: 30px 30px;
         }
 
-        /* --- Custom Premium Scrollbar --- */
-        ::-webkit-scrollbar {
-            width: 4px;
+        /* --- Security Lock Screen --- */
+        #lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #040706;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease;
         }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
+
+        #lock-screen.unlocked {
+            transform: translateY(-100vh);
+            opacity: 0;
+            pointer-events: none;
         }
-        ::-webkit-scrollbar-thumb {
+
+        .lock-container {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--glass-border);
+            padding: 40px 30px;
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            text-align: center;
+            box-shadow: var(--premium-shadow);
+            max-width: 320px;
+            width: 90%;
+        }
+
+        .lock-container h2 {
+            font-family: var(--font-en-premium);
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            color: var(--emerald-green);
+            margin-bottom: 20px;
+        }
+
+        .pin-display {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .pin-dot {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .pin-dot.active {
             background: var(--emerald-green);
-            border-radius: 10px;
+            border-color: var(--emerald-green);
+            box-shadow: 0 0 15px var(--emerald-green);
+        }
+
+        .pin-dot.error {
+            background: #ff4a4a;
+            border-color: #ff4a4a;
+            box-shadow: 0 0 15px #ff4a4a;
+        }
+
+        /* Keypad Styling */
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .key {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--diamond-silver);
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 15px 0;
+            border-radius: 50%;
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .key:active {
+            background: var(--emerald-green);
+            color: #000;
+            box-shadow: 0 0 15px var(--emerald-glow);
+        }
+
+        /* --- Main Content Content Wrapper (Hidden initially) --- */
+        #main-content {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            padding-bottom: 40px;
         }
 
         /* --- Hero Header Section --- */
         header {
             text-align: center;
-            padding: 60px 24px 30px;
-            position: relative;
+            padding: 50px 24px 20px;
         }
 
         .birth-date {
@@ -79,13 +171,12 @@
 
         header h1 {
             font-family: var(--font-en-premium);
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
             line-height: 1.3;
             color: var(--diamond-silver);
-            margin-bottom: 8px;
         }
 
         header h1 span {
@@ -94,52 +185,48 @@
             filter: drop-shadow(0 0 10px var(--emerald-glow));
         }
 
-        header p {
-            font-family: var(--font-bn-premium);
-            font-size: 1.05rem;
-            color: #8a99ad;
-            font-weight: 400;
-            margin-top: 10px;
-        }
-
-        /* --- Gallery Container --- */
-        .gallery-container {
+        /* --- Horizontal Slider Gallery (No More Vertical Stacking) --- */
+        .slider-section {
             width: 100%;
-            padding: 0 20px;
+            margin: 20px 0;
         }
 
-        .bento-grid {
+        .slider-wrapper {
             display: flex;
-            flex-direction: column;
-            gap: 24px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 10px 24px 30px;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
         }
 
-        /* --- Premium Frame & Floating Animation --- */
+        .slider-wrapper::-webkit-scrollbar {
+            display: none; /* Hide scrollbar Chrome/Safari */
+        }
+
         .bento-card {
+            flex: 0 0 82vw; /* Shows 82% of the card, hinting at the next one */
+            scroll-snap-align: center;
             position: relative;
+            height: 380px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             box-shadow: var(--premium-shadow);
-            transform: translateY(0);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             animation: floatingFrame 6s ease-in-out infinite alternate;
         }
 
-        .bento-grid .bento-card:nth-child(even) {
+        .slider-wrapper .bento-card:nth-child(even) {
             animation-delay: 2s;
         }
 
         @keyframes floatingFrame {
-            0% { transform: translateY(0) scale(1); border-color: var(--glass-border); }
-            100% { transform: translateY(-6px) scale(1.01); border-color: rgba(0, 255, 136, 0.15); box-shadow: 0 20px 40px rgba(0, 255, 136, 0.03); }
+            0% { transform: translateY(0); border-color: var(--glass-border); }
+            100% { transform: translateY(-6px); border-color: rgba(0, 255, 136, 0.15); }
         }
-
-        .bento-card.portrait { height: 400px; }
-        .bento-card.square { height: 320px; }
 
         .bento-card::after {
             content: '';
@@ -148,8 +235,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 20px;
-            box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+            border-radius: 24px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
             pointer-events: none;
         }
 
@@ -158,67 +245,68 @@
             height: 100%;
             object-fit: cover;
             filter: brightness(85%) contrast(105%);
-            transition: transform 0.6s ease;
         }
 
-        .bento-card:active img {
-            transform: scale(1.03);
-            filter: brightness(100%);
+        /* --- Premium Text Wish & Letter Cards --- */
+        .content-container {
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
-        /* --- Premium Text Box Style --- */
         .text-card {
             background: linear-gradient(145deg, rgba(255,255,255,0.01) 0%, rgba(0,255,136,0.02) 100%);
-            padding: 30px 24px;
-            animation: none;
+            padding: 26px 20px;
+            border-radius: 20px;
             border-left: 3px solid var(--emerald-green);
+            box-shadow: var(--premium-shadow);
         }
 
         .text-card h3 {
             font-family: var(--font-bn-premium);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--emerald-green);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .text-card p {
             font-family: var(--font-bn-premium);
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #cbd5e1;
             line-height: 1.7;
         }
 
-        /* --- Letter by Letter Letter Box --- */
         .letter-card {
             background: rgba(255, 255, 255, 0.01);
             border: 1px dashed rgba(0, 255, 136, 0.3);
             border-radius: 20px;
-            padding: 35px 24px;
-            animation: none;
+            padding: 30px 20px;
             position: relative;
+            box-shadow: var(--premium-shadow);
         }
 
         .letter-card::before {
             content: '✉';
             position: absolute;
-            top: -15px;
-            left: 30px;
+            top: -14px;
+            left: 20px;
             background: var(--bg-dark);
-            padding: 0 10px;
+            padding: 0 8px;
             color: var(--emerald-green);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .letter-text {
             font-family: var(--font-bn-premium);
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: #e2e8f0;
             line-height: 1.8;
-            min-height: 150px;
+            min-height: 140px;
         }
 
-        /* --- Lightbox --- */
+        /* --- Lightbox Gallery --- */
         .lightbox {
             position: fixed;
             top: 0;
@@ -236,7 +324,6 @@
             pointer-events: none;
             transition: opacity 0.4s ease;
         }
-
         .lightbox.active { opacity: 1; pointer-events: auto; }
         .lightbox img {
             max-width: 90%;
@@ -244,7 +331,7 @@
             border-radius: 12px;
             box-shadow: 0 0 50px rgba(0, 255, 136, 0.15);
             transform: scale(0.95);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.4s;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .lightbox.active img { transform: scale(1); }
@@ -253,108 +340,132 @@
 </head>
 <body>
 
-    <!-- Header Section -->
-    <header>
-        <div class="birth-date">09 July 2007</div>
-        <h1>Happy Birthday<br><span>Pritu</span></h1>
-        <p>আপনার জীবনের বিশেষ এই মুহূর্তগুলো সবসময় সুন্দর থাকুক।</p>
-    </header>
-
-    <!-- Mobile Optimized Layout -->
-    <main class="gallery-container">
-        <div class="bento-grid">
-            
-            <!-- Frame 1 -->
-            <div class="bento-card portrait">
-                <img src="pic1.jpg" alt="Pritu's Memory">
+    <!-- Security PIN Lock Screen -->
+    <div id="lock-screen">
+        <div class="lock-container">
+            <h2>ENTER SECURE PIN</h2>
+            <div class="pin-display">
+                <div class="pin-dot" id="dot-0"></div>
+                <div class="pin-dot" id="dot-1"></div>
+                <div class="pin-dot" id="dot-2"></div>
+                <div class="pin-dot" id="dot-3"></div>
             </div>
-
-            <!-- Frame 2 -->
-            <div class="bento-card square">
-                <img src="pic2.jpg" alt="Pritu's Memory">
+            <div class="keypad">
+                <div class="key" onclick="pressKey('1')">1</div>
+                <div class="key" onclick="pressKey('2')">2</div>
+                <div class="key" onclick="pressKey('3')">3</div>
+                <div class="key" onclick="pressKey('4')">4</div>
+                <div class="key" onclick="pressKey('5')">5</div>
+                <div class="key" onclick="pressKey('6')">6</div>
+                <div class="key" onclick="pressKey('7')">7</div>
+                <div class="key" onclick="pressKey('8')">8</div>
+                <div class="key" onclick="pressKey('9')">9</div>
+                <div class="key" style="visibility: hidden;"></div>
+                <div class="key" onclick="pressKey('0')">0</div>
+                <div class="key" onclick="clearPin()">✕</div>
             </div>
+        </div>
+    </div>
 
-            <!-- Frame 3 -->
-            <div class="bento-card portrait">
-                <img src="pic3.jpg" alt="Pritu's Memory">
+    <!-- Main Content App Cover -->
+    <div id="main-content">
+        <header>
+            <div class="birth-date">09 July 2007</div>
+            <h1>Happy Birthday<br><span>Pritu</span></h1>
+        </header>
+
+        <!-- Horizontal Swipe Showcase (12 Photos) -->
+        <section class="slider-section">
+            <div class="slider-wrapper">
+                <div class="bento-card"><img src="pic1.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic2.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic3.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic4.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic5.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic6.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic7.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic8.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic9.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic10.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic11.jpg" alt="Memory"></div>
+                <div class="bento-card"><img src="pic12.jpg" alt="Memory"></div>
             </div>
+        </section>
 
-            <!-- Wish Card 1 -->
+        <!-- Premium Text Modules Below Slider -->
+        <div class="content-container">
             <div class="text-card">
                 <h3>শুভ জন্মদিন, প্রীতু ✨</h3>
                 <p>আপনার জীবনের এই বিশেষ দিনে চমৎকার সব সাফল্য আর আনন্দ আপনার সঙ্গী হোক। আপনি যেভাবে সবার পাশে থাকেন, আপনার চারপাশটাও যেন ঠিক ততটাই সুন্দর ভালোবাসায় ভরে থাকে।</p>
             </div>
 
-            <!-- Frame 4 -->
-            <div class="bento-card square">
-                <img src="pic4.jpg" alt="Pritu's Memory">
-            </div>
-
-            <!-- Frame 5 -->
-            <div class="bento-card portrait">
-                <img src="pic5.jpg" alt="Pritu's Memory">
-            </div>
-
-            <!-- INTERACTIVE LETTER (Letter by letter animation) -->
+            <!-- Typing Animated Letter Box -->
             <div class="letter-card">
                 <div class="letter-text" id="animated-letter"></div>
             </div>
 
-            <!-- Frame 6 -->
-            <div class="bento-card square">
-                <img src="pic6.jpg" alt="Pritu's Memory">
-            </div>
-
-            <!-- Frame 7 -->
-            <div class="bento-card portrait">
-                <img src="pic7.jpg" alt="Pritu's Memory">
-            </div>
-
-            <!-- Frame 8 -->
-            <div class="bento-card square">
-                <img src="pic8.jpg" alt="Pritu's Memory">
-            </div>
-
-            <!-- Wish Card 2 -->
             <div class="text-card">
                 <h3>সবসময় হাসিখুশি থাকুন 🌿</h3>
                 <p>নতুন এই বছরটি আপনার জীবনে বয়ে আনুক নতুন সব সম্ভাবনা। আপনার প্রতিটি স্বপ্ন সত্যি হোক এবং জীবনের প্রতিটি পদক্ষেপে আপনি যেন সফলতার দেখা পান।</p>
             </div>
-
-            <!-- Frame 9 -->
-            <div class="bento-card portrait">
-                <img src="pic9.jpg" alt="Pritu's Memory">
-            </div>
-
-            <!-- Frame 10 -->
-            <div class="bento-card square">
-                <img src="pic10.jpg" alt="Pritu's Memory">
-            </div>
-
-            <!-- Frame 11 -->
-            <div class="bento-card portrait">
-                <img src="pic11.jpg" alt="Pritu's Memory">
-            </div>
-
-            <!-- Frame 12 -->
-            <div class="bento-card square">
-                <img src="pic12.jpg" alt="Pritu's Memory">
-            </div>
-
         </div>
-    </main>
+    </div>
 
     <!-- Lightbox Overlay -->
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close" id="lightbox-close">&times;</span>
-        <img src="" alt="Enlarged Visual" id="lightbox-img">
+        <img src="" alt="Enlarged" id="lightbox-img">
     </div>
 
-    <!-- Script for Interactions & Letter Animation -->
     <script>
-        // --- Letter by Letter Animation Script ---
+        // --- Security Lock Logic ---
+        const CORRECT_PIN = "0208";
+        let currentPin = "";
+
+        function pressKey(num) {
+            if (currentPin.length < 4) {
+                currentPin += num;
+                updateDots();
+                
+                if (currentPin.length === 4) {
+                    setTimeout(checkPin, 250);
+                }
+            }
+        }
+
+        function clearPin() {
+            currentPin = "";
+            updateDots();
+        }
+
+        function updateDots() {
+            for (let i = 0; i < 4; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                dot.classList.remove('error');
+                if (i < currentPin.length) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            }
+        }
+
+        function checkPin() {
+            if (currentPin === CORRECT_PIN) {
+                document.getElementById('lock-screen').classList.add('unlocked');
+                document.getElementById('main-content').style.opacity = "1";
+                startLetterObserver();
+            } else {
+                // Flash Red on Error
+                for (let i = 0; i < 4; i++) {
+                    document.getElementById(`dot-${i}`).classList.add('error');
+                }
+                setTimeout(clearPin, 600);
+            }
+        }
+
+        // --- Letter Animation Logic ---
         const letterContent = "প্রিয় প্রীতু, আমি রকিব। আজ আপনার জন্মদিনে শুধু এটুকুই বলতে চাই—আমার সবচেয়ে কাছের বন্ধুটি হচ্ছেন আপনি। জীবনের নানা ব্যস্ততার মাঝেও আপনার মতো একজন মানুষকে পাশে পাওয়া সত্যিই ভাগ্যের ব্যাপার। আপনার সাথে কাটানো প্রতিটি মুহূর্ত, প্রতিটি আড্ডা আমার কাছে ভীষণ স্পেশাল। সবসময় এভাবেই হাসিখুশি থাকবেন এবং নিজের খেয়াল রাখবেন। শুভ জন্মদিন!";
-        
         let index = 0;
         const letterElement = document.getElementById('animated-letter');
 
@@ -362,47 +473,37 @@
             if (index < letterContent.length) {
                 letterElement.innerHTML += letterContent.charAt(index);
                 index++;
-                setTimeout(typeLetter, 70); // স্পিড কন্ট্রোল (কমানো বা বাড়ানো যাবে)
+                setTimeout(typeLetter, 65);
             }
         }
 
-        // স্ক্রল করে চিঠির কাছে আসলে অ্যানিমেশন শুরু হবে
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    typeLetter();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        observer.observe(document.getElementById('animated-letter'));
-
+        function startLetterObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        typeLetter();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            observer.observe(letterElement);
+        }
 
         // --- Lightbox Code ---
-        const cards = document.querySelectorAll('.bento-card:not(.text-card)');
+        const cards = document.querySelectorAll('.bento-card');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.getElementById('lightbox-close');
 
         cards.forEach(card => {
             card.addEventListener('click', () => {
-                const source = card.querySelector('img').src;
-                lightboxImg.src = source;
+                lightboxImg.src = card.querySelector('img').src;
                 lightbox.classList.add('active');
             });
         });
 
-        lightboxClose.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-            }
-        });
+        lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('active'); });
     </script>
-
 </body>
 </html>
