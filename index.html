@@ -1,335 +1,320 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Surprise 🎁</title>
+    <title>Happy Birthday!</title>
+    
+    <!-- Google Fonts: Hind Siliguri (For Bengali) & Montserrat (For English) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+
     <style>
-        body {
+        /* --- Premium Color Variables --- */
+        :root {
+            --bg-dark: #0a0f0d;
+            --emerald-green: #00ff88;
+            --emerald-dim: rgba(0, 255, 136, 0.15);
+            --diamond-silver: #e2e8f0;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-en: 'Montserrat', sans-serif;
+            --font-bn: 'Hind Siliguri', sans-serif;
+        }
+
+        /* --- Reset & Base Styles --- */
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fcf6d6; 
-            background-image: repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(186, 163, 214, 0.3) 20px, rgba(186, 163, 214, 0.3) 40px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* ক্যানভা স্টাইল স্লাইডার উইন্ডো */
-        .slider-window {
-            width: 380px;
-            height: 520px;
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border: 4px solid #baa3d6; 
-            overflow: hidden;
-            position: relative;
-        }
-
-        .slider-track {
-            display: flex;
-            width: 800%; /* মোট ৮টি পেজ */
-            height: 100%;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* স্মুথ ক্যানভা স্লাইড ট্রানজিশন */
-        }
-
-        .page {
-            width: 12.5%; /* প্রতিটি পেজের সাইজ ১ ভাগ */
-            height: 100%;
             box-sizing: border-box;
-            padding: 30px 20px;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--diamond-silver);
+            font-family: var(--font-en);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.03) 0%, transparent 40%);
+        }
+
+        /* --- Header Section --- */
+        header {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            margin-bottom: 10px;
+        }
+
+        header h1 span {
+            color: var(--emerald-green);
+            -webkit-text-stroke: none;
+            text-shadow: 0 0 30px var(--emerald-dim);
+        }
+
+        header p {
+            font-family: var(--font-bn);
+            font-size: 1.2rem;
+            color: #94a3b8;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        /* --- Bento Grid Layout --- */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-auto-rows: 240px;
+            gap: 24px;
+            grid-auto-flow: dense;
+        }
+
+        /* --- Glassmorphic Bento Cards --- */
+        .bento-card {
+            position: relative;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            cursor: pointer;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        border-color 0.5s ease;
+        }
+
+        /* Card Variations for Premium Dynamic Look */
+        .bento-card.wide {
+            grid-column: span 2;
+        }
+
+        .bento-card.tall {
+            grid-row: span 2;
+        }
+
+        .bento-card.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* Card Content & Images */
+        .bento-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
+            filter: grayscale(20%) brightness(90%);
+        }
+
+        /* Hover Effects */
+        .bento-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(0, 255, 136, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.08);
+        }
+
+        .bento-card:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        /* --- Text Card Custom Styling --- */
+        .text-card {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(0,255,136,0.02) 100%);
         }
 
-        /* প্রিমিয়াম টাইপোগ্রাফি ও এলিমেন্টস */
-        h2 { 
-            color: #5c4a78; 
-            font-size: 22px; 
-            margin-bottom: 15px;
+        .text-card h3 {
+            font-family: var(--font-bn);
+            font-size: 1.6rem;
             font-weight: 700;
-        }
-
-        .sub-text {
-            font-size: 14px;
-            color: #7d6b9d;
-            margin-top: -10px;
-            margin-bottom: 20px;
-        }
-
-        /* রোবোটিক ক্যাপচা বক্স */
-        .captcha-box {
-            border: 1px solid #d3d3d3;
-            background: #f9f9f9;
-            border-radius: 4px;
-            padding: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 85%;
-            margin-bottom: 25px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .captcha-left { display: flex; align-items: center; gap: 12px; }
-        .captcha-checkbox { width: 24px; height: 24px; cursor: pointer; }
-        .captcha-text { font-size: 14px; color: #333; font-family: Roboto, Arial, sans-serif; }
-        .captcha-logo { text-align: center; font-size: 9px; color: #555; line-height: 1; }
-        .captcha-logo img { width: 26px; display: block; margin: 0 auto 2px; }
-
-        input[type="password"] {
-            width: 80%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 2px solid #baa3d6;
-            border-radius: 8px;
-            font-size: 16px;
-            text-align: center;
-            outline: none;
-            background: #fdfdfd;
-        }
-
-        button {
-            background-color: #4c3c92;
-            color: white;
-            border: none;
-            padding: 12px 40px;
-            font-size: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            width: 85%;
-            transition: background 0.3s;
-        }
-        button:hover { background-color: #3b2e75; }
-
-        /* ডগ ইমেজ এবং অ্যানিমেশন */
-        .dog-gif { 
-            width: 150px; 
-            height: 150px; 
-            object-fit: cover; 
-            border-radius: 50%; 
-            margin: 15px auto; 
-            border: 3px solid #baa3d6;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        /* হার্ট শেপ মাস্ক ডগ ছবির জন্য */
-        .heart-mask {
-            width: 150px;
-            height: 150px;
-            background: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI0Z3d3Z3NqZ2o0NDB6MTN3Zmx4bWptOHR6Nms3b3RndXN5bWV4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xT0xeuOy2Fcl9vDGiA/giphy.gif') center center no-repeat;
-            background-size: cover;
-            clip-path: url(#heart-path); /* কাস্টম হার্ট মাস্ক বা গোল উইথ লাভ */
-            border-radius: 50%; /* সেফটি ব্যাকআপ */
-            margin: 15px auto;
-        }
-
-        .btn-group { display: flex; justify-content: center; gap: 15px; width: 85%; }
-        .yes-btn { background-color: #baa3d6; border-radius: 50px; width: 100px; }
-        .no-btn { background-color: #e0d5ed; color: #5c4a78; border-radius: 50px; width: 100px; }
-        .click-btn { background-color: #baa3d6; border-radius: 50px; width: auto; padding: 12px 50px; }
-
-        /* অপশনস গ্রিড */
-        .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 25px; width: 90%; }
-        .icon-item { background: #fdfbf7; padding: 20px 5px; border-radius: 16px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 2px solid transparent; transition: 0.2s; }
-        .icon-item:hover { border-color: #baa3d6; transform: translateY(-3px); }
-        .icon-item span { font-size: 42px; display: block; margin-bottom: 8px; }
-        .icon-item label { font-size: 13px; color: #5c4a78; font-weight: bold; cursor: pointer; }
-
-        /* হুবহু Google Search UI Layout */
-        .google-header { text-align: left; border-bottom: 1px solid #ebebeb; padding-bottom: 10px; margin-bottom: 15px; width: 100%; }
-        .google-logo { font-size: 24px; font-weight: bold; color: #4285F4; margin-bottom: 8px; font-family: 'Product Sans', Arial, sans-serif; }
-        .google-logo span:nth-child(2) { color: #EA4335; }
-        .google-logo span:nth-child(3) { color: #FBBC05; }
-        .google-logo span:nth-child(4) { color: #4285F4; }
-        .google-logo span:nth-child(5) { color: #34A853; }
-        .google-logo span:nth-child(6) { color: #EA4335; }
-        
-        .search-bar-mock {
-            border: 1px solid #dfe1e5;
-            padding: 10px 15px;
-            border-radius: 24px;
-            font-size: 14px;
-            color: #202124;
-            background: #fff;
-            box-shadow: 0 1px 6px rgba(32,33,36,0.18);
+            color: var(--emerald-green);
             margin-bottom: 12px;
+        }
+
+        .text-card p {
+            font-family: var(--font-bn);
+            font-size: 1.05rem;
+            color: #a0aec0;
+            line-height: 1.7;
+        }
+
+        /* --- Lightbox / Premium Preview --- */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(6, 10, 8, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
         }
-        .google-tabs { display: flex; gap: 15px; font-size: 13px; color: #5f6368; }
-        .google-tabs .active { color: #1a73e8; border-bottom: 3px solid #1a73e8; font-weight: bold; padding-bottom: 5px; }
 
-        .google-gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            max-height: 220px;
-            overflow-y: auto;
-            width: 100%;
-            padding: 5px 0;
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
         }
-        .google-gallery img { width: 100%; height: 85px; object-fit: cover; border-radius: 8px; }
 
-        /* চিঠি পেজ */
-        .letter-text { background: #fdfbf7; padding: 20px; border-radius: 16px; border: 1px dashed #baa3d6; max-height: 220px; overflow-y: auto; text-align: left; font-size: 14px; line-height: 1.6; color: #4a3b63; width: 90%; box-sizing: border-box;}
-        .back-btn { background-color: #baa3d6; padding: 8px 25px; font-size: 14px; margin-top: 20px; border-radius: 50px; width: auto; }
+        .lightbox img {
+            max-width: 85%;
+            max-height: 80vh;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 80px rgba(0, 255, 136, 0.1);
+            transform: scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 2rem;
+            color: var(--diamond-silver);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--emerald-green);
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .bento-card.wide, .bento-card.large { grid-column: span 1; }
+            .bento-card.tall, .bento-card.large { grid-row: span 1; }
+            .bento-grid { grid-auto-rows: 280px; gap: 16px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="slider-window">
-        <div class="slider-track" id="track">
+    <!-- Header Section -->
+    <header>
+        <h1>Happy Birthday <span>✨</span></h1>
+        <p>আমাদের কাটানো সেরা কিছু মুহূর্তের একটি চমৎকার সংকলন।</p>
+    </header>
+
+    <!-- Bento Grid Gallery -->
+    <main class="gallery-container">
+        <div class="bento-grid">
             
-            <!-- পেজ ০: পাসওয়ার্ড ও ক্যাপচা -->
-            <div class="page">
-                <h2>Enter the password to view</h2>
-                <input type="password" id="pwd" placeholder="••••••••">
-                
-                <div class="captcha-box">
-                    <div class="captcha-left">
-                        <input type="checkbox" id="captcha-check" class="captcha-checkbox">
-                        <span class="captcha-text">I'm not a robot</span>
-                    </div>
-                    <div class="captcha-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/RecaptchaLogo.svg" alt="reCAPTCHA">
-                        <span>reCAPTCHA</span>
-                    </div>
-                </div>
-                <button onclick="checkPwd()">Continue</button>
+            <!-- Card 1: Large Feature Image -->
+            <div class="bento-card large">
+                <img src="pic1.jpg" alt="Birthday Memory">
             </div>
 
-            <!-- পেজ ১: প্রশ্ন স্ক্রিন -->
-            <div class="page">
-                <h2>Hey! I made something for you <br> do you wanna see it? 🥺</h2>
-                <img class="dog-gif" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdtcm9wYm95NzR0ZXN5OXp3Ym95eW95YnEwbXpqNXA0bms4ZXFwdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWZfY3Q9cw/cKKXp6rAsT54c/giphy.gif" alt="Cute Dog">
-                <div class="btn-group">
-                    <button class="yes-btn" onclick="slideToPage(3)">Yes</button>
-                    <button class="no-btn" onclick="slideToPage(2)">No</button>
-                </div>
+            <!-- Card 2: Premium Wish Text -->
+            <div class="bento-card text-card wide">
+                <h3>শুভ জন্মদিন! 🌿</h3>
+                <p>তোর জীবনের নতুন এই বছরটি যেন চমৎকার সব সুখে ভরে ওঠে। সবসময় এভাবেই হাসিখুশি থাকিস এবং তোর সব স্বপ্ন সত্যি হোক!</p>
             </div>
 
-            <!-- পেজ ২: No চাপলে Hmph রিঅ্যাকশন -->
-            <div class="page">
-                <h2>SERIOUSLY!? how dare you hmph 😤</h2>
-                <img class="dog-gif" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5b293NTh3bXYxamN4YW9pY2g0dWpndmN5b3Zsa3VwcmN4bmRxOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/t33M0N935U8m63fL7W/giphy.gif" alt="Angry Dog">
-                <div class="btn-group">
-                    <button class="yes-btn" onclick="slideToPage(1)">Go back</button>
-                </div>
+            <!-- Card 3: Tall Image -->
+            <div class="bento-card tall">
+                <img src="pic2.jpg" alt="Birthday Memory">
             </div>
 
-            <!-- পেজ ৩: That's a good Gurll -->
-            <div class="page">
-                <h2>That's a good Gurll 🤍</h2>
-                <div class="heart-mask"></div>
-                <button class="click-btn" onclick="slideToPage(4)">Click ✨</button>
+            <!-- Card 4: Standard Image -->
+            <div class="bento-card">
+                <img src="pic3.jpg" alt="Birthday Memory">
             </div>
 
-            <!-- পেজ ৪: মূল মেনু গ্রিড -->
-            <div class="page">
-                <h2>click on each item to open ✨</h2>
-                <div class="icon-grid">
-                    <div class="icon-item" onclick="slideToPage(5)">
-                        <span>📸</span>
-                        <label>Memories</label>
-                    </div>
-                    <div class="icon-item" onclick="slideToPage(6)">
-                        <span>✉️</span>
-                        <label>Letter</label>
-                    </div>
-                    <div class="icon-item" onclick="slideToPage(7)">
-                        <span>📟</span>
-                        <label>Our Song</label>
-                    </div>
-                </div>
+            <!-- Card 5: Wide Image -->
+            <div class="bento-card wide">
+                <img src="pic4.jpg" alt="Birthday Memory">
             </div>
 
-            <!-- পেজ ৫: গুগল মেমোরিজ গ্যালারি -->
-            <div class="page" style="justify-content: flex-start;">
-                <div class="google-header">
-                    <div class="google-logo"><span>M</span><span>e</span><span>m</span><span>o</span><span>r</span><span>i</span><span>e</span><span>s</span><span>❤️</span></div>
-                    <div class="search-bar-mock">
-                        <span>Moments of us 💖</span>
-                        <span>🔍</span>
-                    </div>
-                    <div class="google-tabs">
-                        <div class="active">All</div>
-                        <div>Images</div>
-                        <div>Videos</div>
-                        <div>Maps</div>
-                    </div>
-                </div>
-                <div class="google-gallery">
-                    <img src="https://picsum.photos/id/1025/150/150" alt="Memory 1">
-                    <img src="https://picsum.photos/id/64/150/150" alt="Memory 2">
-                    <img src="https://picsum.photos/id/1062/150/150" alt="Memory 3">
-                    <img src="https://picsum.photos/id/237/150/150" alt="Memory 4">
-                    <img src="https://picsum.photos/id/169/150/150" alt="Memory 5">
-                    <img src="https://picsum.photos/id/219/150/150" alt="Memory 6">
-                </div>
-                <button class="back-btn" onclick="slideToPage(4)">Back</button>
+            <!-- Card 6: Standard Image -->
+            <div class="bento-card">
+                <img src="pic5.jpg" alt="Birthday Memory">
             </div>
 
-            <!-- পেজ ৬: চিঠি -->
-            <div class="page">
-                <h2>Happy Birthday, Bestie! ✨📝</h2>
-                <div class="letter-text">
-                    "I honestly don't know how to put into words how grateful I am to have you in my life. Thank you for being my biggest supporter, my partner in crime, and the person I can always count on..."
-                </div>
-                <button class="back-btn" onclick="slideToPage(4)">Back</button>
+            <!-- Card 7: Tall Image -->
+            <div class="bento-card tall">
+                <img src="pic6.jpg" alt="Birthday Memory">
             </div>
 
-            <!-- পেজ ৭: মিউজিক প্লেয়ার -->
-            <div class="page">
-                <h2>Count on Me 🎶</h2>
-                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; width: 90%;">
-                    <iframe id="music-player" style="position: absolute; top:0; left:0; width:100%; height:100%;" src="https://www.youtube.com/embed/Yc6T9iY9SOU?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <button class="back-btn" onclick="slideToPage(4)">Back</button>
+            <!-- Card 8: Text Card -->
+            <div class="bento-card text-card">
+                <h3>থ্যাঙ্কস ফর এভরিথিং ✨</h3>
+                <p>সবচেয়ে ভালো একজন বন্ধু হয়ে পাশে থাকার জন্য ধন্যবাদ। দিনটি তোর জন্য অনেক স্পেশাল হোক!</p>
+            </div>
+
+            <!-- Card 9: Standard Image -->
+            <div class="bento-card">
+                <img src="pic7.jpg" alt="Birthday Memory">
             </div>
 
         </div>
+    </main>
+
+    <!-- Premium Lightbox Overlay -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img src="" alt="Enlarged Memory" id="lightbox-img">
     </div>
 
+    <!-- JavaScript for Lightbox Interaction -->
     <script>
-        const correctPassword = "bday"; 
+        const bentoCards = document.querySelectorAll('.bento-card:not(.text-card)');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
 
-        function checkPwd() {
-            const input = document.getElementById('pwd').value;
-            const captchaChecked = document.getElementById('captcha-check').checked;
-            
-            if(!captchaChecked) {
-                alert("Please verify that you're not a robot! 🤖");
-                return;
-            }
-            
-            if(input === correctPassword) {
-                slideToPage(1); // পাসওয়ার্ড মিললে ১ম পেজে স্লাইড হবে
-            } else {
-                alert("Wrong password! 🤫");
-            }
-        }
+        // Open Lightbox on Click
+        bentoCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const imgTarget = card.querySelector('img').src;
+                lightboxImg.src = imgTarget;
+                lightbox.classList.add('active');
+            });
+        });
 
-        function slideToPage(pageIndex) {
-            const track = document.getElementById('track');
-            // ক্যানভা স্টাইলে পুরো ট্র্যাকটিকে বামে সরিয়ে নেওয়া (১২.৫% করে প্রতি পেজ)
-            track.style.transform = `translateX(-${pageIndex * 12.5}%)`;
+        // Close Lightbox
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
 
-            // মিউজিক পেজ থেকে বের হলে গান পজ করার ট্রিক
-            const player = document.getElementById('music-player');
-            if(pageIndex !== 7 && player) {
-                player.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        // Close Lightbox on Background Click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
             }
-        }
+        });
     </script>
+
 </body>
 </html>
