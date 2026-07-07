@@ -40,7 +40,6 @@
             font-family: var(--font-en-body);
             overflow-x: hidden;
             padding-bottom: 60px;
-            /* subtle premium grid line overlay */
             background-image: 
                 linear-gradient(rgba(0, 255, 136, 0.01) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 255, 136, 0.01) 1px, transparent 1px);
@@ -59,7 +58,7 @@
             border-radius: 10px;
         }
 
-        /* --- Hero Header Section (Mobile Perfect) --- */
+        /* --- Hero Header Section --- */
         header {
             text-align: center;
             padding: 60px 24px 30px;
@@ -103,7 +102,7 @@
             margin-top: 10px;
         }
 
-        /* --- Premium Mobile Grid --- */
+        /* --- Gallery Container --- */
         .gallery-container {
             width: 100%;
             padding: 0 20px;
@@ -112,7 +111,7 @@
         .bento-grid {
             display: flex;
             flex-direction: column;
-            gap: 24px; /* Clean spacing for mobile */
+            gap: 24px;
         }
 
         /* --- Premium Frame & Floating Animation --- */
@@ -130,33 +129,18 @@
             animation: floatingFrame 6s ease-in-out infinite alternate;
         }
 
-        /* Staggered animation effect for frames */
         .bento-grid .bento-card:nth-child(even) {
             animation-delay: 2s;
         }
 
         @keyframes floatingFrame {
-            0% {
-                transform: translateY(0) scale(1);
-                border-color: var(--glass-border);
-            }
-            100% {
-                transform: translateY(-6px) scale(1.01);
-                border-color: rgba(0, 255, 136, 0.15);
-                box-shadow: 0 20px 40px rgba(0, 255, 136, 0.03);
-            }
+            0% { transform: translateY(0) scale(1); border-color: var(--glass-border); }
+            100% { transform: translateY(-6px) scale(1.01); border-color: rgba(0, 255, 136, 0.15); box-shadow: 0 20px 40px rgba(0, 255, 136, 0.03); }
         }
 
-        /* Aspect Ratios for Variety on Mobile */
-        .bento-card.portrait {
-            height: 400px;
-        }
+        .bento-card.portrait { height: 400px; }
+        .bento-card.square { height: 320px; }
 
-        .bento-card.square {
-            height: 320px;
-        }
-
-        /* Premium Picture Frame Shadow Mask */
         .bento-card::after {
             content: '';
             position: absolute;
@@ -177,7 +161,6 @@
             transition: transform 0.6s ease;
         }
 
-        /* Active/Touch Effect for Mobile */
         .bento-card:active img {
             transform: scale(1.03);
             filter: brightness(100%);
@@ -187,7 +170,7 @@
         .text-card {
             background: linear-gradient(145deg, rgba(255,255,255,0.01) 0%, rgba(0,255,136,0.02) 100%);
             padding: 30px 24px;
-            animation: none; /* No float for text */
+            animation: none;
             border-left: 3px solid var(--emerald-green);
         }
 
@@ -197,9 +180,6 @@
             font-weight: 700;
             color: var(--emerald-green);
             margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .text-card p {
@@ -207,10 +187,38 @@
             font-size: 1rem;
             color: #cbd5e1;
             line-height: 1.7;
-            font-weight: 400;
         }
 
-        /* --- Elegant Lightbox for Mobile View --- */
+        /* --- Letter by Letter Letter Box --- */
+        .letter-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px dashed rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 35px 24px;
+            animation: none;
+            position: relative;
+        }
+
+        .letter-card::before {
+            content: '✉';
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: var(--bg-dark);
+            padding: 0 10px;
+            color: var(--emerald-green);
+            font-size: 1.2rem;
+        }
+
+        .letter-text {
+            font-family: var(--font-bn-premium);
+            font-size: 1.05rem;
+            color: #e2e8f0;
+            line-height: 1.8;
+            min-height: 150px;
+        }
+
+        /* --- Lightbox --- */
         .lightbox {
             position: fixed;
             top: 0;
@@ -229,11 +237,7 @@
             transition: opacity 0.4s ease;
         }
 
-        .lightbox.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
+        .lightbox.active { opacity: 1; pointer-events: auto; }
         .lightbox img {
             max-width: 90%;
             max-height: 75vh;
@@ -243,19 +247,8 @@
             transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .lightbox.active img {
-            transform: scale(1);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 40px;
-            right: 30px;
-            font-size: 2.5rem;
-            color: var(--diamond-silver);
-            font-weight: 300;
-        }
+        .lightbox.active img { transform: scale(1); }
+        .lightbox-close { position: absolute; top: 40px; right: 30px; font-size: 2.5rem; color: var(--diamond-silver); }
     </style>
 </head>
 <body>
@@ -271,41 +264,81 @@
     <main class="gallery-container">
         <div class="bento-grid">
             
-            <!-- Card 1: Portrait Image -->
+            <!-- Frame 1 -->
             <div class="bento-card portrait">
                 <img src="pic1.jpg" alt="Pritu's Memory">
             </div>
 
-            <!-- Card 2: Premium Text Wish 1 -->
-            <div class="bento-card text-card">
-                <h3>শুভ জন্মদিন, প্রীতু ✨</h3>
-                <p>আপনার জীবনের এই বিশেষ দিনে চমৎকার সব সাফল্য আর আনন্দ আপনার সঙ্গী হোক। আপনি যেভাবে সবার পাশে থাকেন, আপনার চারপাশটাও যেন ঠিক ততটাই সুন্দর ভালোবাসায় ভরে থাকে।</p>
-            </div>
-
-            <!-- Card 3: Square Image -->
+            <!-- Frame 2 -->
             <div class="bento-card square">
                 <img src="pic2.jpg" alt="Pritu's Memory">
             </div>
 
-            <!-- Card 4: Portrait Image -->
+            <!-- Frame 3 -->
             <div class="bento-card portrait">
                 <img src="pic3.jpg" alt="Pritu's Memory">
             </div>
 
-            <!-- Card 5: Premium Text Wish 2 -->
-            <div class="bento-card text-card">
-                <h3>সবসময় হাসিখুশি থাকুন 🌿</h3>
-                <p>নতুন এই বছরটি আপনার জীবনে বয়ে আনুক নতুন সব সম্ভাবনা। আপনার প্রতিটি স্বপ্ন সত্যি হোক এবং জীবনের প্রতিটি পদক্ষেপে আপনি যেন সফলতার দেখা পান।</p>
+            <!-- Wish Card 1 -->
+            <div class="text-card">
+                <h3>শুভ জন্মদিন, প্রীতু ✨</h3>
+                <p>আপনার জীবনের এই বিশেষ দিনে চমৎকার সব সাফল্য আর আনন্দ আপনার সঙ্গী হোক। আপনি যেভাবে সবার পাশে থাকেন, আপনার চারপাশটাও যেন ঠিক ততটাই সুন্দর ভালোবাসায় ভরে থাকে।</p>
             </div>
 
-            <!-- Card 6: Square Image -->
+            <!-- Frame 4 -->
             <div class="bento-card square">
                 <img src="pic4.jpg" alt="Pritu's Memory">
             </div>
 
-            <!-- Card 7: Portrait Image -->
+            <!-- Frame 5 -->
             <div class="bento-card portrait">
                 <img src="pic5.jpg" alt="Pritu's Memory">
+            </div>
+
+            <!-- INTERACTIVE LETTER (Letter by letter animation) -->
+            <div class="letter-card">
+                <div class="letter-text" id="animated-letter"></div>
+            </div>
+
+            <!-- Frame 6 -->
+            <div class="bento-card square">
+                <img src="pic6.jpg" alt="Pritu's Memory">
+            </div>
+
+            <!-- Frame 7 -->
+            <div class="bento-card portrait">
+                <img src="pic7.jpg" alt="Pritu's Memory">
+            </div>
+
+            <!-- Frame 8 -->
+            <div class="bento-card square">
+                <img src="pic8.jpg" alt="Pritu's Memory">
+            </div>
+
+            <!-- Wish Card 2 -->
+            <div class="text-card">
+                <h3>সবসময় হাসিখুশি থাকুন 🌿</h3>
+                <p>নতুন এই বছরটি আপনার জীবনে বয়ে আনুক নতুন সব সম্ভাবনা। আপনার প্রতিটি স্বপ্ন সত্যি হোক এবং জীবনের প্রতিটি পদক্ষেপে আপনি যেন সফলতার দেখা পান।</p>
+            </div>
+
+            <!-- Frame 9 -->
+            <div class="bento-card portrait">
+                <img src="pic9.jpg" alt="Pritu's Memory">
+            </div>
+
+            <!-- Frame 10 -->
+            <div class="bento-card square">
+                <img src="pic10.jpg" alt="Pritu's Memory">
+            </div>
+
+            <!-- Frame 11 -->
+            <div class="bento-card portrait">
+                <img src="pic11.jpg" alt="Pritu's Memory">
+            </div>
+
+            <!-- Frame 12 -->
+            <div class="bento-card square">
+                <img src="pic12.jpg" alt="Pritu's Memory">
             </div>
 
         </div>
@@ -317,8 +350,36 @@
         <img src="" alt="Enlarged Visual" id="lightbox-img">
     </div>
 
-    <!-- Interactions -->
+    <!-- Script for Interactions & Letter Animation -->
     <script>
+        // --- Letter by Letter Animation Script ---
+        const letterContent = "প্রিয় প্রীতু, আমি রকিব। আজ আপনার জন্মদিনে শুধু এটুকুই বলতে চাই—আমার সবচেয়ে কাছের বন্ধুটি হচ্ছেন আপনি। জীবনের নানা ব্যস্ততার মাঝেও আপনার মতো একজন মানুষকে পাশে পাওয়া সত্যিই ভাগ্যের ব্যাপার। আপনার সাথে কাটানো প্রতিটি মুহূর্ত, প্রতিটি আড্ডা আমার কাছে ভীষণ স্পেশাল। সবসময় এভাবেই হাসিখুশি থাকবেন এবং নিজের খেয়াল রাখবেন। শুভ জন্মদিন!";
+        
+        let index = 0;
+        const letterElement = document.getElementById('animated-letter');
+
+        function typeLetter() {
+            if (index < letterContent.length) {
+                letterElement.innerHTML += letterContent.charAt(index);
+                index++;
+                setTimeout(typeLetter, 70); // স্পিড কন্ট্রোল (কমানো বা বাড়ানো যাবে)
+            }
+        }
+
+        // স্ক্রল করে চিঠির কাছে আসলে অ্যানিমেশন শুরু হবে
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    typeLetter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.getElementById('animated-letter'));
+
+
+        // --- Lightbox Code ---
         const cards = document.querySelectorAll('.bento-card:not(.text-card)');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
