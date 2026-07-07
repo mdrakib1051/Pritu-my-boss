@@ -3,179 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
+    <title>শুভ জন্মদিন প্রীতু!</title>
     
-    <!-- Google Fonts: Hind Siliguri (For Bengali) & Montserrat (For English) -->
+    <!-- Google Fonts: Hind Siliguri (Bengali) & Syncopate/Montserrat (Premium English) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Montserrat:wght@300;400;700;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- Premium Color Variables --- */
+        /* --- Premium Design Tokens --- */
         :root {
-            --bg-dark: #0a0f0d;
+            --bg-dark: #070b09;
             --emerald-green: #00ff88;
-            --emerald-dim: rgba(0, 255, 136, 0.15);
+            --emerald-glow: rgba(0, 255, 136, 0.3);
             --diamond-silver: #e2e8f0;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --font-en: 'Montserrat', sans-serif;
-            --font-bn: 'Hind Siliguri', sans-serif;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.07);
+            --premium-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            
+            --font-en-premium: 'Syncopate', sans-serif;
+            --font-en-body: 'Montserrat', sans-serif;
+            --font-bn-premium: 'Hind Siliguri', sans-serif;
         }
 
-        /* --- Reset & Base Styles --- */
+        /* --- Reset & Mobile First Optimization --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--diamond-silver);
-            font-family: var(--font-en);
+            font-family: var(--font-en-body);
             overflow-x: hidden;
+            padding-bottom: 60px;
+            /* subtle premium grid line overlay */
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.03) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.03) 0%, transparent 40%);
+                linear-gradient(rgba(0, 255, 136, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.01) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
-        /* --- Header Section --- */
+        /* --- Custom Premium Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--emerald-green);
+            border-radius: 10px;
+        }
+
+        /* --- Hero Header Section (Mobile Perfect) --- */
         header {
             text-align: center;
-            padding: 80px 20px 40px;
+            padding: 60px 24px 30px;
+            position: relative;
+        }
+
+        .birth-date {
+            font-family: var(--font-en-premium);
+            font-size: 0.75rem;
+            letter-spacing: 5px;
+            color: var(--emerald-green);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            display: inline-block;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            padding-bottom: 4px;
         }
 
         header h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
+            font-family: var(--font-en-premium);
+            font-size: 2rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-            margin-bottom: 10px;
+            letter-spacing: 2px;
+            line-height: 1.3;
+            color: var(--diamond-silver);
+            margin-bottom: 8px;
         }
 
         header h1 span {
-            color: var(--emerald-green);
-            -webkit-text-stroke: none;
-            text-shadow: 0 0 30px var(--emerald-dim);
+            color: transparent;
+            -webkit-text-stroke: 1px var(--emerald-green);
+            filter: drop-shadow(0 0 10px var(--emerald-glow));
         }
 
         header p {
-            font-family: var(--font-bn);
-            font-size: 1.2rem;
-            color: #94a3b8;
+            font-family: var(--font-bn-premium);
+            font-size: 1.05rem;
+            color: #8a99ad;
             font-weight: 400;
-            letter-spacing: 1px;
+            margin-top: 10px;
         }
 
-        /* --- Bento Grid Layout --- */
+        /* --- Premium Mobile Grid --- */
         .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+            width: 100%;
+            padding: 0 20px;
         }
 
         .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            grid-auto-rows: 240px;
-            gap: 24px;
-            grid-auto-flow: dense;
+            display: flex;
+            flex-direction: column;
+            gap: 24px; /* Clean spacing for mobile */
         }
 
-        /* --- Glassmorphic Bento Cards --- */
+        /* --- Premium Frame & Floating Animation --- */
         .bento-card {
             position: relative;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: 20px;
             overflow: hidden;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            cursor: pointer;
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
-                        box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-                        border-color 0.5s ease;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: var(--premium-shadow);
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            animation: floatingFrame 6s ease-in-out infinite alternate;
         }
 
-        /* Card Variations for Premium Dynamic Look */
-        .bento-card.wide {
-            grid-column: span 2;
+        /* Staggered animation effect for frames */
+        .bento-grid .bento-card:nth-child(even) {
+            animation-delay: 2s;
         }
 
-        .bento-card.tall {
-            grid-row: span 2;
+        @keyframes floatingFrame {
+            0% {
+                transform: translateY(0) scale(1);
+                border-color: var(--glass-border);
+            }
+            100% {
+                transform: translateY(-6px) scale(1.01);
+                border-color: rgba(0, 255, 136, 0.15);
+                box-shadow: 0 20px 40px rgba(0, 255, 136, 0.03);
+            }
         }
 
-        .bento-card.large {
-            grid-column: span 2;
-            grid-row: span 2;
+        /* Aspect Ratios for Variety on Mobile */
+        .bento-card.portrait {
+            height: 400px;
         }
 
-        /* Card Content & Images */
+        .bento-card.square {
+            height: 320px;
+        }
+
+        /* Premium Picture Frame Shadow Mask */
+        .bento-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+            pointer-events: none;
+        }
+
         .bento-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
-            filter: grayscale(20%) brightness(90%);
+            filter: brightness(85%) contrast(105%);
+            transition: transform 0.6s ease;
         }
 
-        /* Hover Effects */
-        .bento-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            border-color: rgba(0, 255, 136, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.08);
+        /* Active/Touch Effect for Mobile */
+        .bento-card:active img {
+            transform: scale(1.03);
+            filter: brightness(100%);
         }
 
-        .bento-card:hover img {
-            transform: scale(1.05);
-            filter: grayscale(0%) brightness(100%);
-        }
-
-        /* --- Text Card Custom Styling --- */
+        /* --- Premium Text Box Style --- */
         .text-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(0,255,136,0.02) 100%);
+            background: linear-gradient(145deg, rgba(255,255,255,0.01) 0%, rgba(0,255,136,0.02) 100%);
+            padding: 30px 24px;
+            animation: none; /* No float for text */
+            border-left: 3px solid var(--emerald-green);
         }
 
         .text-card h3 {
-            font-family: var(--font-bn);
-            font-size: 1.6rem;
+            font-family: var(--font-bn-premium);
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--emerald-green);
             margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .text-card p {
-            font-family: var(--font-bn);
-            font-size: 1.05rem;
-            color: #a0aec0;
+            font-family: var(--font-bn-premium);
+            font-size: 1rem;
+            color: #cbd5e1;
             line-height: 1.7;
+            font-weight: 400;
         }
 
-        /* --- Lightbox / Premium Preview --- */
+        /* --- Elegant Lightbox for Mobile View --- */
         .lightbox {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(6, 10, 8, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(4, 7, 6, 0.98);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 2000;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.4s ease;
         }
 
         .lightbox.active {
@@ -184,12 +235,13 @@
         }
 
         .lightbox img {
-            max-width: 85%;
-            max-height: 80vh;
-            border-radius: 16px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 80px rgba(0, 255, 136, 0.1);
-            transform: scale(0.9);
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            max-width: 90%;
+            max-height: 75vh;
+            border-radius: 12px;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.15);
+            transform: scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .lightbox.active img {
@@ -198,24 +250,11 @@
 
         .lightbox-close {
             position: absolute;
-            top: 30px;
-            right: 40px;
-            font-size: 2rem;
+            top: 40px;
+            right: 30px;
+            font-size: 2.5rem;
             color: var(--diamond-silver);
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .lightbox-close:hover {
-            color: var(--emerald-green);
-        }
-
-        /* Responsive Fixes */
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.5rem; }
-            .bento-card.wide, .bento-card.large { grid-column: span 1; }
-            .bento-card.tall, .bento-card.large { grid-row: span 1; }
-            .bento-grid { grid-auto-rows: 280px; gap: 16px; }
+            font-weight: 300;
         }
     </style>
 </head>
@@ -223,92 +262,80 @@
 
     <!-- Header Section -->
     <header>
-        <h1>Happy Birthday <span>✨</span></h1>
-        <p>আমাদের কাটানো সেরা কিছু মুহূর্তের একটি চমৎকার সংকলন।</p>
+        <div class="birth-date">09 July 2007</div>
+        <h1>Happy Birthday<br><span>Pritu</span></h1>
+        <p>আপনার জীবনের বিশেষ এই মুহূর্তগুলো সবসময় সুন্দর থাকুক।</p>
     </header>
 
-    <!-- Bento Grid Gallery -->
+    <!-- Mobile Optimized Layout -->
     <main class="gallery-container">
         <div class="bento-grid">
             
-            <!-- Card 1: Large Feature Image -->
-            <div class="bento-card large">
-                <img src="pic1.jpg" alt="Birthday Memory">
+            <!-- Card 1: Portrait Image -->
+            <div class="bento-card portrait">
+                <img src="pic1.jpg" alt="Pritu's Memory">
             </div>
 
-            <!-- Card 2: Premium Wish Text -->
-            <div class="bento-card text-card wide">
-                <h3>শুভ জন্মদিন! 🌿</h3>
-                <p>তোর জীবনের নতুন এই বছরটি যেন চমৎকার সব সুখে ভরে ওঠে। সবসময় এভাবেই হাসিখুশি থাকিস এবং তোর সব স্বপ্ন সত্যি হোক!</p>
-            </div>
-
-            <!-- Card 3: Tall Image -->
-            <div class="bento-card tall">
-                <img src="pic2.jpg" alt="Birthday Memory">
-            </div>
-
-            <!-- Card 4: Standard Image -->
-            <div class="bento-card">
-                <img src="pic3.jpg" alt="Birthday Memory">
-            </div>
-
-            <!-- Card 5: Wide Image -->
-            <div class="bento-card wide">
-                <img src="pic4.jpg" alt="Birthday Memory">
-            </div>
-
-            <!-- Card 6: Standard Image -->
-            <div class="bento-card">
-                <img src="pic5.jpg" alt="Birthday Memory">
-            </div>
-
-            <!-- Card 7: Tall Image -->
-            <div class="bento-card tall">
-                <img src="pic6.jpg" alt="Birthday Memory">
-            </div>
-
-            <!-- Card 8: Text Card -->
+            <!-- Card 2: Premium Text Wish 1 -->
             <div class="bento-card text-card">
-                <h3>থ্যাঙ্কস ফর এভরিথিং ✨</h3>
-                <p>সবচেয়ে ভালো একজন বন্ধু হয়ে পাশে থাকার জন্য ধন্যবাদ। দিনটি তোর জন্য অনেক স্পেশাল হোক!</p>
+                <h3>শুভ জন্মদিন, প্রীতু ✨</h3>
+                <p>আপনার জীবনের এই বিশেষ দিনে চমৎকার সব সাফল্য আর আনন্দ আপনার সঙ্গী হোক। আপনি যেভাবে সবার পাশে থাকেন, আপনার চারপাশটাও যেন ঠিক ততটাই সুন্দর ভালোবাসায় ভরে থাকে।</p>
             </div>
 
-            <!-- Card 9: Standard Image -->
-            <div class="bento-card">
-                <img src="pic7.jpg" alt="Birthday Memory">
+            <!-- Card 3: Square Image -->
+            <div class="bento-card square">
+                <img src="pic2.jpg" alt="Pritu's Memory">
+            </div>
+
+            <!-- Card 4: Portrait Image -->
+            <div class="bento-card portrait">
+                <img src="pic3.jpg" alt="Pritu's Memory">
+            </div>
+
+            <!-- Card 5: Premium Text Wish 2 -->
+            <div class="bento-card text-card">
+                <h3>সবসময় হাসিখুশি থাকুন 🌿</h3>
+                <p>নতুন এই বছরটি আপনার জীবনে বয়ে আনুক নতুন সব সম্ভাবনা। আপনার প্রতিটি স্বপ্ন সত্যি হোক এবং জীবনের প্রতিটি পদক্ষেপে আপনি যেন সফলতার দেখা পান।</p>
+            </div>
+
+            <!-- Card 6: Square Image -->
+            <div class="bento-card square">
+                <img src="pic4.jpg" alt="Pritu's Memory">
+            </div>
+
+            <!-- Card 7: Portrait Image -->
+            <div class="bento-card portrait">
+                <img src="pic5.jpg" alt="Pritu's Memory">
             </div>
 
         </div>
     </main>
 
-    <!-- Premium Lightbox Overlay -->
+    <!-- Lightbox Overlay -->
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close" id="lightbox-close">&times;</span>
-        <img src="" alt="Enlarged Memory" id="lightbox-img">
+        <img src="" alt="Enlarged Visual" id="lightbox-img">
     </div>
 
-    <!-- JavaScript for Lightbox Interaction -->
+    <!-- Interactions -->
     <script>
-        const bentoCards = document.querySelectorAll('.bento-card:not(.text-card)');
+        const cards = document.querySelectorAll('.bento-card:not(.text-card)');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.getElementById('lightbox-close');
 
-        // Open Lightbox on Click
-        bentoCards.forEach(card => {
+        cards.forEach(card => {
             card.addEventListener('click', () => {
-                const imgTarget = card.querySelector('img').src;
-                lightboxImg.src = imgTarget;
+                const source = card.querySelector('img').src;
+                lightboxImg.src = source;
                 lightbox.classList.add('active');
             });
         });
 
-        // Close Lightbox
         lightboxClose.addEventListener('click', () => {
             lightbox.classList.remove('active');
         });
 
-        // Close Lightbox on Background Click
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
                 lightbox.classList.remove('active');
